@@ -1,5 +1,5 @@
 
-public class policy {
+public class Policy {
     private int pNum;
     private String pName; 
     private String phFirstName;
