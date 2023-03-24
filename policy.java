@@ -1,16 +1,16 @@
 
 public class Policy {
-    private int bmi;
     private int pNum;
     private int phAge;
     private String pName; 
     private String phFirstName;
     private String phLastName;
     private String phSmoking;
-    private double height;
-    private double weight;
+    private float bmi;
+    private float height;
+    private float weight;
     
-
+/** *
     public void policy() {
         pNum = 0;
         pName = "";
@@ -22,8 +22,8 @@ public class Policy {
         weight = 0;
         
     }
-
-    public void policy(int n, String pN, String phFN, String phLN, String phA, String phS, double h, double w ) {
+*/
+    public void policy(int n, String pN, String phFN, String phLN, int phA, String phS, float h , float w ) {
         pNum = n;
         pName = pN;
         phFirstName = phFN;
@@ -31,7 +31,7 @@ public class Policy {
         phAge = phA;
         phSmoking = phS;
         height = h;
-        weight = w;
+        //weight = w;
         
     }
 
@@ -61,11 +61,11 @@ public class Policy {
         phSmoking = phS;
     }
 
-    public void setPolicyHolderHeight(double h) {
+    public void setPolicyHolderHeight(float h) {
         height = h;
     }
 
-    public void setPolicyHolderWeight(double w) {
+    public void setPolicyHolderWeight(float w) {
         weight = w;
     }
 
@@ -95,23 +95,37 @@ public class Policy {
         return phSmoking;
     }
 
-    public double getPolicyHolderHeight() {
+    public float getPolicyHolderHeight() {
         return height;
     }
 
-    public double getPolicyHolderWeight() {
+    public float getPolicyHolderWeight() {
         return weight;
     }
 
-    public double getBmi() {
+    public float getBmi() {
+        bmi = (weight*703)/(height*height);
         return bmi;
     }
 
 
-    public int insurancePolicyPrice(int bmi, int age, String smoker) {
+    //total price of the insurance Policy
+    public float insurancePolicyPrice() {
         //returns the base fee of 600 + the aditional fee depending on the bmi, + 75 if the policy holder is over 50, and an extra 100 if the policy holder is a smoker
-        return 600 + ((bmi-35)*20) + (age>50 ? 75:0) + (smoker.equalsIgnoreCase("smoker")?100:0);
+        return (600 + ((bmi-35)*20) + (phAge>50 ? 75:0) + (phSmoking.equalsIgnoreCase("smoker")?100:0));
     }
-    
-}
 
+    //Display result
+    public void Display(){
+        System.out.printf("\nPolicy Number: %s\n", pNum);
+        System.out.printf("Provider Name: %s\n", pName);
+        System.out.printf("Policyholder’s First Name:%s\n", phFirstName);
+        System.out.printf("Policyholder’s Last Name: %s\n", phLastName);
+        System.out.printf("Policyholder’s Age: %s\n", phAge);
+        System.out.printf("Policyholder’s Smoking Status: %s\n", phSmoking);
+        System.out.printf("Policyholder’s Height: %.1f inches\n", height);
+        System.out.printf("Policyholder’s Weight: %.1f pounds\n", weight);
+        System.out.printf("Policyholder’s BMI: %.2f\n", getBmi());
+        System.out.printf("Policy Price: $%.2f\n", insurancePolicyPrice());
+    }
+}
